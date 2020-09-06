@@ -1,0 +1,45 @@
+<header th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="/">Rental Motor</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
+                </li>
+                <li sec:authorize="isAuthenticated()" class="nav-item active">
+                    <a class="nav-link" href="/peminjaman">Peminjaman<span class="sr-only">(current)</span></a>
+                </li>
+                <li sec:authorize="isAuthenticated()" class="nav-item active">
+                    <a class="nav-link" href="/pengembalian">Pengembalian<span class="sr-only">(current)</span></a>
+                </li>
+                <li sec:authorize="isAuthenticated()" class="nav-item active">
+                    <a class="nav-link" href="#">Laporan<span class="sr-only">(current)</span></a>
+                    <div class="dropdown-menu" aria-labelledby="Laporan">
+                        <a class="dropdown-item" href="#">Jumlah Kendaraan Tersedia by Cabang</a>
+                        <a class="dropdown-item" href="#">Jumlah Kendaraan yang di Rental</a>
+                        
+                    </div>
+                </li>
+                
+            </ul>
+        </div>
+        <div sec:authorize="isAuthenticated()" class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    	<i class="fas fa-user fa-fw">
+                    		<i class="fa fa-fw fa-user"></i>
+                    		<span class="text-white" th:text="${#authentication.getPrincipal().getUsername()}" />
+                    	</i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="#">Settings</a>
+                        <a class="dropdown-item" href="#">Activity Log</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/logout">Logout</a>
+                    </div>
+        </div>
+    </nav>
+</header>

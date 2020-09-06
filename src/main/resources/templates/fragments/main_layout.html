@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Rental Motor</title>
+    <!-- Bootstrap core CSS -->
+<!--     <link href="../../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" -->
+<!--           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+<!--     <link href="../../node_modules/bootstrap/dist/css/style.css" rel="stylesheet" crossorigin="anonymous"> -->
+    <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous"/>
+	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet" crossorigin="anonymous"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" type="text/css" crossorigin="anonymous" />
+<!--     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css" type="text/css" crossorigin="anonymous" /> -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" type="text/css" crossorigin="anonymous" />
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/build/css/bootstrap-datetimepicker.css" type="text/css" crossorigin="anonymous" />
+</head>
+<body>
+
+<div th:replace="fragments/header :: header">
+    <!-- this part created for header.html fragment-->
+</div>
+
+<div layout:fragment="content">
+    <!-- this part created for views fragment-->
+</div>
+
+<div th:replace="fragments/footer :: footer">
+    <!-- this part created for footer.html fragment-->
+</div>
+<!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" -->
+<!--         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" -->
+<!--         crossorigin="anonymous"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js" crossorigin="anonymous"></script>        
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<!-- <script src="../../node_modules/bootstrap/dist/js/bootstrap.min.js" -->
+<!--         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" -->
+<!--         crossorigin="anonymous"></script> -->
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+<script src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/src/js/bootstrap-datetimepicker.js" type="text/javascript"></script>
+
+
+
+<script>
+$(function() {
+    $('#tgllahir').datepicker({
+        format: "dd/mm/yyyy"
+    });
+    
+    $('#tglpeminjaman').datetimepicker();
+});
+</script>
+<script type="text/javascript">
+$(document ).ready(function() {
+	
+
+// 			var nokendaraan;
+// 			var phone;
+
+	
+	// GET REQUEST
+	  $("#check").click(function(event){
+	    event.preventDefault();
+	    ajaxGet();
+	  });
+	
+	  function ajaxGet(){
+		  
+		  var formData = {
+				    nokendaraan : $("#nokendaraan").val(),
+					phone :  $("#phone").val()
+			    }
+		  console.log("formData: ", formData);
+		  console.log("JSON.stringify(formData): ", JSON.stringify(formData));
+		    $.ajax({
+		    	type: "POST",
+		        contentType: "application/json",
+		        url: "/api/peminjaman",
+		        data: JSON.stringify(formData),
+		        dataType: 'json',
+				success: function(data){
+					console.log("data: ", data);
+					console.log("lamasewa: ", data[0]);
+					console.log("totalbayar: ", data[1]);
+					$("#lamasewa").value = data[0];
+					$("#totalbayar").value = data[2];
+					document.getElementById("lamasewa").value = data[0];
+					document.getElementById("totalbayar").value = data[1];
+					document.getElementById("id").value = data[2];
+				},
+				error : function(e) {
+					
+					console.log("ERROR: ", e);
+				}
+			});	
+	  }
+});
+</script>
+</body>
+</html>

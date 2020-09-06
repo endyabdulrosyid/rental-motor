@@ -1,0 +1,58 @@
+!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.springframework.org/schema/data/jaxb"
+      layout:decorate="~{fragments/main_layout}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Pengembalian</title>
+</head>
+<body>
+	<div layout:fragment="content" class="container" >
+    	<div class="simple-login-container  col-md-4 offset-md-4">
+    		<h2>Pengembalian Form</h2>
+    		<form th:action="@{/pengembalian-save}" th:object="${pengembalian}" method="post">
+    			<div class="row">
+	                <div class="col-md-12 form-group">
+	                	<label for="nokendaraan" class="form-control-label">No Kendaraan</label>
+	                    <input type="text" class="form-control" placeholder="No Kendaraan" id="nokendaraan" >
+	                </div>
+	            </div>
+	            <div class="row">
+	                <div class="col-md-12 form-group">
+	                <label for="phone" class="form-control-label">Phone</label>
+	                    <input type="text" class="form-control" placeholder="Phone" id="phone">
+	                </div>
+	            </div>
+	            <div class="row">
+	                <div class="col-md-12 form-group">
+	                    <button id="check" type="button" class="btn btn-primary">Check Harga</button>
+	                </div>
+	            </div>
+	            <div class="row">
+	                <div class="col-md-12 form-group">
+	                	<label for="id" class="form-control-label">id</label>
+	                    <input type="number" class="form-control" readonly="readonly" placeholder="id" id="id" th:field="*{id}">
+	                </div>
+	            </div>
+	            <div class="row">
+	                <div class="col-md-12 form-group">
+	                	<label for="lamasewa" class="form-control-label">Lama Sewa</label>
+	                    <input type="number" class="form-control" readonly="readonly" placeholder="Lama Sewa" id="lamasewa" th:field="*{lamaSewa}">
+	                </div>
+	            </div>
+	            <div class="row">
+	                <div class="col-md-12 form-group">
+	                	<label for="totalbayar" class="form-control-label">Total Bayar</label>
+	                    <input type="number" class="form-control" readonly="readonly" placeholder="Total Bayar" id="totalbayar" th:field="*{totalbayar}">
+	                </div>
+	            </div>
+	            <div class="row">
+	                <div class="col-md-12 form-group">
+	                    <input type="submit" class="btn btn-primary btn-block btn-login">
+	                </div>
+	            </div>
+    		</form>
+    	</div>
+    </div>
+</body>
+</html>

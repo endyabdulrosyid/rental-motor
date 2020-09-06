@@ -1,0 +1,70 @@
+!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.springframework.org/schema/data/jaxb"
+      layout:decorate="~{fragments/main_layout}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Peminjaman</title>
+</head>
+<body>
+<div layout:fragment="content" class="container" >
+    <div class="simple-login-container  col-md-4 offset-md-4">
+        
+        <h2>Peminjaman Form</h2>
+        <form th:action="@{/peminjaman}" th:object="${peminjaman}" method="post">
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <input type="text" class="form-control" placeholder="Name" id="name" th:field="*{name}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+<!--                     <input type="text" class="form-control" placeholder="Cabang" id="cabang" th:field="*{cabang}"> -->
+                    <select class="form-control custom-select" id="cabang" th:field="*{cabang}">
+					  <option value="" disabled selected>Choose your option</option>
+					  <option value="1">Cabang 1</option>
+					  <option value="2">Cabang 2</option>
+					  <option value="3">Cabang 3</option>
+					  <option value="4">Cabang 4</option>
+					  <option value="5">Cabang 5</option>
+					</select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+					<div class="input-group">
+			            <input id="tgllahir" type="text" class="form-control date-input" readonly="readonly" th:field="*{tgllahir}"/>
+			            <label class="input-group-btn" for="tgllahir">
+			                <span class="btn btn-default">
+			                    <span class="glyphicon glyphicon-calendar"></span>
+			                </span>
+			            </label>
+			        </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <input type="text" placeholder="Nomor Identitas"  id="noidentitas" class="form-control" th:field="*{noidentitas}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <input type="text" placeholder="Phone"  id="phone" class="form-control" th:field="*{phone}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <input type="text" placeholder="No Kendaraan"  id="nokendaraan" class="form-control" th:field="*{nokendaraan}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <input type="submit" class="btn btn-primary btn-block btn-login">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
